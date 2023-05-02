@@ -1,0 +1,1090 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ALFAsposeHelper</name>
+    </assembly>
+    <members>
+        <member name="T:ALFAsposeHelper.Excel">
+            <summary>
+            Bir DataTablei excele aktarmak icin kullanilan class
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Excel.Red">
+            <summary>
+            rgb renklerden kirmizi icin in deger 0-255 orasinda olmali
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Excel.Green">
+            <summary>
+            rgb renklerden Yesil icin in deger 0-255 orasinda olmali
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Excel.Blue">
+            <summary>
+            rgb renklerden Mavi icin in deger 0-255 orasinda olmali
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Excel.Labelstyle">
+            <summary>
+            Exceldeki Basliklar isin style 
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Excel.CellStyle">
+            <summary>
+            Exceldeki celler icin style
+            </summary>
+        </member>
+        <member name="M:ALFAsposeHelper.Excel.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:ALFAsposeHelper.Excel.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Basliklarin renklerini degistirmek icin kullanilacak constructor
+            </summary>
+            <param name="red">rgb renklerden kirmizi icin in deger 0-255 orasinda olmali</param>
+            <param name="green">rgb renklerden Yesil icin in deger 0-255 orasinda olmali</param>
+            <param name="blue">rgb renklerden Mavi icin in deger 0-255 orasinda olmali</param>
+        </member>
+        <member name="M:ALFAsposeHelper.Excel.#ctor(System.Int32,System.Int32,System.Int32,Aspose.Cells.Style)">
+            <summary>
+            Basliklarin renkleri ve stilini degistirmek icin kullanilmasi gereken constructor
+            </summary>
+            <param name="red">rgb renklerden kirmizi icin in deger 0-255 orasinda olmali</param>
+            <param name="green">rgb renklerden Yesil icin in deger 0-255 orasinda olmali</param>
+            <param name="blue">rgb renklerden Mavi icin in deger 0-255 orasinda olmali</param>
+            <param name="labelstyle">Aspose cell Stil elementi</param>
+        </member>
+        <member name="M:ALFAsposeHelper.Excel.#ctor(System.Int32,System.Int32,System.Int32,Aspose.Cells.Style,Aspose.Cells.Style)">
+            <summary>
+            Basliklarin renkleri ve stilini degistirmek icin kullanilmasi gereken constructor
+            </summary>
+            <param name="red">rgb renklerden kirmizi icin in deger 0-255 orasinda olmali</param>
+            <param name="green">rgb renklerden Yesil icin in deger 0-255 orasinda olmali</param>
+            <param name="blue">rgb renklerden Mavi icin in deger 0-255 orasinda olmali</param>
+            <param name="labelstyle">Aspose cell Stil elementi</param>
+            <param name="cellStyle">Aspose cell Stil elementi</param>
+        </member>
+        <member name="M:ALFAsposeHelper.Excel.Download(System.Collections.Generic.List{System.Tuple{System.String,System.Data.DataTable}},System.String,System.Action{System.IO.Stream,System.String})">
+            <summary>
+            Excel Indirme methodu
+            </summary>
+            <param name="parameters">Her bir tuple 1 sheeti simgeler, 1. eleman sheet adi iken 2. eleman verileri tutan datatable idir(DataTablein kolon isimleri excelde gosterilir)</param>
+            <param name="outputName">Indirilecek dosyanin uzanti dahil edilmemis haliyle adi</param>
+            <param name="WriteToResponse">Ebada kullanilan dosya indirme methodu</param>
+        </member>
+        <member name="M:ALFAsposeHelper.Fields.TakeFields(ALFAsposeHelper.Info,System.String,System.Collections.Generic.List{System.String},System.Func{eBADB.eBADBProvider},ALFAsposeHelper.GlobalAttributes,System.Func{System.String,System.String,System.Boolean})">
+            <summary>
+            Excelde kullanılacak Kolonları dinamik bir şekilde toplayan method
+            </summary>
+            <returns>Sırası ile kolon adı, kolonun bulunduğu tablo ve kolonun tipini Barındıran Liste döner. </returns>
+        </member>
+        <member name="T:ALFAsposeHelper.GlobalAttributes">
+            <summary>
+            Form ve kolon bilgilerini tutan class
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.GlobalAttributes.Fields">
+            <summary>
+            Excele indirilmemsini istemedigimiz alanlarin isimlerini Hashset{string} olarak tutuyoruz
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.GlobalAttributes.Alphabet">
+            <summary>
+            kiril alfabasi
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.GlobalAttributes.AuthForms">
+             <summary>
+             Log Modulu olan ve authorization sistemi olan projeler icin bu dictionary kullaniliyor, yetkinin lookupdaki IDsi ve ilgili yetkinin formu yazilmalidir
+             Ornegin;
+             Dictionary{string, string}()
+            {
+            	{"5548","MdlPersonnelContract" },
+            	{"5549","MdlPersonnelEmployeeInfo" },
+            	{"5550","MdlPersonnelPassport" },
+            };
+             </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.GlobalAttributes.DictFormTextBoxes">
+            <summary>
+            Log Modulunde Modal formlarin isimlerini ve ilgili Modal formlarin Ana formda tutulduklari textbox ile auth yetkisindeki IDlerinin tutuldugu Dictionary
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.GlobalAttributes.Forms">
+             <summary>
+             Log modulleri icin modal formlarin isimlerini , main formda IDlerini tutan textboxlari ve keywordlerini tutan field
+             <para>ornek olarak;</para>
+            <para>List&lt;Tuple&lt;string, string, string&gt;&gt;(){</para>	
+            <para>⠀⠀⠀⠀new Tuple&lt;string, string, string&gt;("MdlPersonnelPassport","txtPassportModalFormId","passport"),</para>	
+            <para>⠀⠀⠀⠀new Tuple&lt;string, string, string&gt;("MdlPersonnelPatentApplication","txtPatentApplicationModalFormId","patent"),</para>	
+            <para>⠀⠀⠀⠀new Tuple&lt;string, string, string&gt;("FrmPersonnel","ID","personnel" )};</para>	
+             </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.GlobalAttributes.DateColumns">
+            <summary>
+            Eger kolonlar arasinda tarih olup icinde Date gecmeyenler varsa bu listeye eklenmeleri gerekli
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.GlobalAttributes.RestrictedFields">
+            <summary>
+            Veriyi excele cektigimizde gosterilmesini istedigimiz ama veriyi yuklerken sisteme aktarilmasini istemedigimiz(guvenlik nedenleriyle) kolonlar
+            </summary>
+        </member>
+        <member name="T:ALFAsposeHelper.Info">
+            <summary>
+            Proje detaylarinin tutuldugu class
+            </summary>
+        </member>
+        <member name="T:ALFAsposeHelper.Info.EnumUploadType">
+            <summary>
+            veri yukleme tipi
+            </summary>
+        </member>
+        <member name="F:ALFAsposeHelper.Info.EnumUploadType.Update">
+            <summary>
+            update
+            </summary>
+        </member>
+        <member name="F:ALFAsposeHelper.Info.EnumUploadType.Import">
+            <summary>
+            import
+            </summary>
+        </member>
+        <member name="T:ALFAsposeHelper.Info.EnumDownloadType">
+            <summary>
+            veri indirme tipi
+            </summary>
+        </member>
+        <member name="F:ALFAsposeHelper.Info.EnumDownloadType.Update">
+            <summary>
+            update
+            </summary>
+        </member>
+        <member name="F:ALFAsposeHelper.Info.EnumDownloadType.Import">
+            <summary>
+            import
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.UploadType">
+            <summary>
+            veri yukleme tipi
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.DownloadType">
+            <summary>
+            veri indirme tipi
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.AuthConnectionName">
+            <summary>
+            log sistemi icin authorization sorgusunun bulundugu connection adi
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.AuthQueryName">
+            <summary>
+            log sistemi icin authorization sorgusunun adi
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.AuthQuery">
+            <summary>
+            Visual Studyoda calistirmak icin gerekli auth querysinin tamami(integration managerdaki orjinal hali)
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.AuthParameters">
+            <summary>
+            Integratin managerdaki mantikla calisan query parametreleri
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.MainFormName">
+            <summary>
+            tek form ise formun degilse ana formun adi => "FrmPersonnel"
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.ProjectName">
+            <summary>
+            Eğer işlem Sql tablosu İşlemi değilse ilgili Projenin adı => "Pon002Personnel"
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.MtlTableName">
+            <summary>
+            Sistemde Lookup Mevcutsa Lookup Valuelarinin tutuldugu Tablonun Adi => "TbPon000LookupValues"
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.MtlColumnName">
+            <summary>
+            Eger Lookupta MultiLang varsa dilleri icermeyen column adi, degilse veriyi tutan columnun adi => "VALUE1"
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.UniqueColumnType">
+            <summary>
+            Update Yapmak Icin gerekli olan Unique Columun veri tipi => typeof(string)
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.DictCmbFieldQueries">
+            <summary>
+            <para>Lookuptan beslenmeyen cmblerin ve dropdownlarin iceriklerini excele yazmamis icin gerekli sorgulari saklayan dictionary, </para>
+            <para>key olarak ilgili kolonun adini value olarak da 2 kolon iceren bir sql sorgusu tutar, sorgudan </para>
+            <para>donen veriler ilgili kolonun alabilecegi veriler ve IDleridir, ilk kolon text ikinci kolon value/ID olmalidir</para>
+            <para>org =>  { "cmbGroupChief", "SELECT DISTINCT VALUE, ID AS LOOKUP FROM TbPon015ForemanList " }</para>
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.DictCmbDictionaryQueries">
+            <summary>
+            Artik kullanilmiyor
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.TemplatePath">
+            <summary>
+            Artik kullanilmiyor ama kullanildigi zaman bu sekilde kullaniliyordur =>"PONDM/ExcelTemplates/DataBulkUpdate.xlsm"
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.DownloadName">
+            <summary>
+            Indirilecek Dosyanin uzantisiyla birlikte Adi"Data_Bulk_Update.xlsm"
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.NotEnoughObjectMessage">
+            <summary>
+            Update icin veri secilmedigi zaman kullaniciya gosterilecek Uyari mesaji default olarak "Lutfen once secim yapiniz" yazilidir
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.UniqueColumnInfo">
+            <summary>
+            <para>Updatein gerceklestirilebilmesi adina unique bir kolon gerekli ID/Employee ID gibi, bu kolonun adi, </para>
+            <para>tutuldugu form, excelde gosterilecek Labeli ve secilen verileri getirecek sorgusu tuple olarak tutulur</para>
+            <para>new Tuple{string, string, string,string}("txtEmployeeId", "FrmPersonnel", "Employee ID / Sicil No", @"SELECT txtEmployeeId</para>
+            <para>FROM E_Pon002Personnel_FrmPersonnel FRM WITH(NOLOCK)</para>
+            <para>INNER JOIN DOCUMENTS D WITH(NOLOCK) ON FRM.ID = D.ID</para>
+            <para>WHERE txtEmployeeId in ({ 0}) AND D.DELETED = 0</para>
+            <para>ORDER BY FRM.txtEmployeeId");</para>
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.PreDefinedColums">
+            <summary>
+            Excelde gosterilecek ama yuklendiginde update edilmeyecek veriler icin bu liste kullanilir, icerigi uniquecolumnInfo ile aynidir
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.AttachmentCategory">
+            <summary>
+            Genel olarak attachment kategorisi default tutuluyor ama olasi durumda farkli bir kategori istenilirse bu field kullanilabilir
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.FailedUpdate">
+            <summary>
+            <para>Update yapilirken bazi Verilerde hata olustuysa gosterilecek mesaji belirler default olarak,</para>
+            <para>"Güncelleme Tamamlandı ama Bazı Hatalar Mevcutö Lütfen İndirilmiş Zip Dosyasını Kontrol Ediniz!" yazmaktadir </para>
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.SuccesfullUpdate">
+            <summary>
+            Update Basarili sekilde tamamlanmissa bu mesaj gosterilir, default olarak "Güncelleme Başarılı Şekilde Tamamlandı" yazmaktadir
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.ErrorOnUpdate">
+            <summary>
+            Hatadan dolayi her hangi bir sekilde surec iptal edildiyse bu mesaj  gozukur, "Sistemsel Bir Hata Oluştu, Lütfen Formu Yenileyip Tekrar Deneyiniz!" default valuesudur
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.MtlUpdateQuery">
+            <summary>
+            Artik Kullanilmiyor
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.Info.UpdateExceptions">
+            <summary>
+            Log sisteminde ana formda guncellenip modal formda guncellenmesini istemedigimiz veriler varsa onlar icin kullanilir
+            </summary>
+        </member>
+        <member name="T:ALFAsposeHelper.InfoLog">
+            <summary>
+            Excel yuklendikten sonra olusan bilgilendirme mesajlarini tutan class
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.InfoLog.ChangedFieldsNote">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.InfoLog.MissingForms">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.InfoLog.ErrorLog">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ALFAsposeHelper.InfoLog.UsedForms">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ALFAsposeHelper.InfoLog.DownloadLogZip(System.String,System.Action{System.Byte[],System.String})">
+            <summary>
+            Upload işlemi sırasında değişen alanları, oluşan hataları, açık ya da <br/> eksik formları txt dosyaları haline 
+            getirip zipleyerek indirten method.
+            </summary>
+        </member>
+        <member name="T:ALFAsposeHelper.MultipleFormsDownload">
+            <summary>
+            log sistemi icin formun indirilmesini saglayan class
+            eger update degilde import yapilacaksa dictPersonel empty dataTable gonderilebilir
+            </summary>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsDownload.Download(ALFAsposeHelper.Info,ALFAsposeHelper.Excel,ALFAsposeHelper.GlobalAttributes,System.String,System.String,System.Func{eBADB.eBADBProvider},System.Action{System.String},System.Action{System.IO.Stream,System.String},System.Action{System.String,System.Int32,eBAControls.eBABaseForm.ShowInfoBarType},System.Collections.Generic.Dictionary{System.String,System.Data.DataTable},System.Boolean,System.Boolean)">
+            <summary>
+            Ebadaki Log sistemi mevcut modullerdeki  bilgilerin update import icin hazirlanan templatei olusturur
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="excel">exceldeki satirlarin stylelari icin aspose.cell stylerini iceren class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="language">Turkish English gibi kullanilan dil belirtilmeli</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="ShowMessageBar">dllde hata verdigi icin ebadaki ShowMessageBar methodu parametre olarak verilir</param>
+            <param name="dictPersonnels">Update Yapilacaksa update edilecek sql satirlarinin unique edilerini iceren bir datatable sistemin global idsi ile dictionarye eklenmeli</param>
+            <param name="multiLanguage">Lookupsta multilanguage varsa true degilse false</param>
+            <param name="labelMultiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsDownload.Download(ALFAsposeHelper.Info,ALFAsposeHelper.Excel,ALFAsposeHelper.GlobalAttributes,System.String,System.String,System.Func{eBADB.eBADBProvider},System.Action{System.String},System.Action{System.IO.Stream,System.String},System.Action{System.String,System.Int32,eBAControls.eBABaseForm.ShowInfoBarType},System.Collections.Generic.Dictionary{System.String,System.Data.DataTable},System.Boolean,System.Boolean,System.Collections.Generic.List{System.String})">
+            <summary>
+            Ebadaki Log sistemi mevcut modullerdeki  bilgilerin update import icin hazirlanan templatei olusturur
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="excel">exceldeki satirlarin stylelari icin aspose.cell stylerini iceren class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="language">Turkish English gibi kullanilan dil belirtilmeli</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="ShowMessageBar">dllde hata verdigi icin ebadaki ShowMessageBar methodu parametre olarak verilir</param>
+            <param name="dictPersonnels">Update Yapilacaksa update edilecek sql satirlarinin unique edilerini iceren bir datatable sistemin global idsi ile dictionarye eklenmeli</param>
+            <param name="multiLanguage">Lookupsta multilanguage varsa true degilse false</param>
+            <param name="labelMultiLanguage">Labellarda multilanguage varsa true degilse false</param>
+            <param name="dtFields">Alanlar Dinamik secilmeyecekse string list halinde verilmeleri gerekir</param>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsDownload.Download(ALFAsposeHelper.Info,ALFAsposeHelper.Excel,ALFAsposeHelper.GlobalAttributes,System.String,System.String,System.Func{eBADB.eBADBProvider},System.Action{System.String},System.Action{System.IO.Stream,System.String},System.Action{System.String,System.Int32,eBAControls.eBABaseForm.ShowInfoBarType},System.Collections.Generic.Dictionary{System.String,System.Data.DataTable},System.Boolean,System.Boolean,System.Collections.Generic.List{System.String},System.Func{System.String,System.String,System.Boolean})">
+            <summary>
+            Ebadaki Log sistemi mevcut modullerdeki  bilgilerin update import icin hazirlanan templatei olusturur
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="excel">exceldeki satirlarin stylelari icin aspose.cell stylerini iceren class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="language">Turkish English gibi kullanilan dil belirtilmeli</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="ShowMessageBar">dllde hata verdigi icin ebadaki ShowMessageBar methodu parametre olarak verilir</param>
+            <param name="dictPersonnels">Update Yapilacaksa update edilecek sql satirlarinin unique edilerini iceren bir datatable sistemin global idsi ile dictionarye eklenmeli</param>
+            <param name="multiLanguage">Lookupsta multilanguage varsa true degilse false</param>
+            <param name="labelMultiLanguage">Labellarda multilanguage varsa true degilse false</param>
+            <param name="dtFields">Alanlar Dinamik secilmeyecekse string list halinde verilmeleri gerekir</param>
+            <param name="passColumns">Bazi projelere ozel olarak bazi sartlarda kolonlarin gecilmesi gerekebilir, bu gibi durumlarda bu method kullanilmalidir</param>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsDownload.Execute(ALFAsposeHelper.Info,ALFAsposeHelper.Excel,ALFAsposeHelper.GlobalAttributes,System.String,System.String,System.Func{eBADB.eBADBProvider},System.Action{System.String},System.Action{System.IO.Stream,System.String},System.Action{System.String,System.Int32,eBAControls.eBABaseForm.ShowInfoBarType},System.Collections.Generic.Dictionary{System.String,System.Data.DataTable},System.Boolean,System.Boolean,System.Collections.Generic.List{System.String},System.Func{System.String,System.String,System.Boolean})">
+            <summary>
+            Seçilen personellerin, seçilen alanlardaki bilgileriyle dolu bir excel üreten method <br/><br/>
+            dtFields >> ilgili kolonların isimlerini barındıran List <br/>
+            langugage >> dillerin dropdown listteki kodu (1,2,3)<br/>
+            logonUser >> user ID <br/> 
+            globalId >> Formun Global IDsi <br/>
+            passcolumns ilk parametre olarak formun adini ve ikinci parametre olarak kolonun adini alir boylece custom kurallar ile o kolonun gecilip gecilmeyecegi belirlenir
+            </summary>
+        </member>
+        <member name="T:ALFAsposeHelper.MultipleFormsUpload">
+            <summary>
+            Log sistemindeki formlara update ve ya import yapmak icin kullanilan class
+            </summary>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.#ctor(System.String,ALFAsposeHelper.GlobalAttributes)">
+            <summary>
+            formun unique idsi ve globalAttribute classini kullanan constructor, globalAttribute.Forms null olmamali!
+            </summary>
+            <param name="globalId"></param>
+            <param name="GlobalAttributes"></param>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{System.Collections.Generic.KeyValuePair{System.String[],System.Collections.Generic.List{System.String}},System.Data.DataRow,System.String,System.String,System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="AdditionalUpdate">Update ya da import sirasinda sql tarafinda harici bir islem yapilmasi gerekirse bu parametreyi kullanarak kendi methodunuzu olusturabilirsiniz</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Type}},System.String,ALFAsposeHelper.InfoLog,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Object[],System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="Validations">Mutlaka girilmesi gereken alanlar, olmamasi gereken eslesmeler gibi projeye ozel kontroller icin method olusturup bu parametreyi kullanabilirsiniz</param>
+            <param name="parameters">Validations methodu icin extra parametrelere gerek duyarsaniz object array olarak atama yapip methodunuzda ilgili castler ile bu parametreden nesnelerinizi cekebilirsiniz</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Type}},System.String,ALFAsposeHelper.InfoLog,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Object[],System.Func{System.Collections.Generic.KeyValuePair{System.String[],System.Collections.Generic.List{System.String}},System.Data.DataRow,System.String,System.String,System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="Validations">Mutlaka girilmesi gereken alanlar, olmamasi gereken eslesmeler gibi projeye ozel kontroller icin method olusturup bu parametreyi kullanabilirsiniz</param>
+            <param name="parameters">Validations methodu icin extra parametrelere gerek duyarsaniz object array olarak atama yapip methodunuzda ilgili castler ile bu parametreden nesnelerinizi cekebilirsiniz</param>
+            <param name="AdditionalUpdate">Update ya da import sirasinda sql tarafinda harici bir islem yapilmasi gerekirse bu parametreyi kullanarak kendi methodunuzu olusturabilirsiniz</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="SecondValidation">extrem durumlar haricinde kullanilmasina gerek olmayacak bir parametre, genel olarak validations parametresi ile istenilen validasyonlar yapilabilir</param>
+            <param name="secondParameters">secondValidation methodunun parametresi</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Func{System.Collections.Generic.KeyValuePair{System.String[],System.Collections.Generic.List{System.String}},System.Data.DataRow,System.String,System.String,System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="SecondValidation">extrem durumlar haricinde kullanilmasina gerek olmayacak bir parametre, genel olarak validations parametresi ile istenilen validasyonlar yapilabilir</param>
+            <param name="secondParameters">secondValidation methodunun parametresi</param>
+            <param name="AdditionalUpdate">Update ya da import sirasinda sql tarafinda harici bir islem yapilmasi gerekirse bu parametreyi kullanarak kendi methodunuzu olusturabilirsiniz</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Type}},System.String,ALFAsposeHelper.InfoLog,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Object[],System.Func{System.Collections.Generic.KeyValuePair{System.String[],System.Collections.Generic.List{System.String}},System.Data.DataRow,System.String,System.String,System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="Validations">Mutlaka girilmesi gereken alanlar, olmamasi gereken eslesmeler gibi projeye ozel kontroller icin method olusturup bu parametreyi kullanabilirsiniz</param>
+            <param name="SecondValidation">extrem durumlar haricinde kullanilmasina gerek olmayacak bir parametre, genel olarak validations parametresi ile istenilen validasyonlar yapilabilir</param>
+            <param name="parameters">Validations methodu icin extra parametrelere gerek duyarsaniz object array olarak atama yapip methodunuzda ilgili castler ile bu parametreden nesnelerinizi cekebilirsiniz</param>
+            <param name="secondParameters">secondValidation methodunun parametresi</param>
+            <param name="AdditionalUpdate">Update ya da import sirasinda sql tarafinda harici bir islem yapilmasi gerekirse bu parametreyi kullanarak kendi methodunuzu olusturabilirsiniz</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Type}},System.String,ALFAsposeHelper.InfoLog,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Object[],System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="Validations">Mutlaka girilmesi gereken alanlar, olmamasi gereken eslesmeler gibi projeye ozel kontroller icin method olusturup bu parametreyi kullanabilirsiniz</param>
+            <param name="SecondValidation">extrem durumlar haricinde kullanilmasina gerek olmayacak bir parametre, genel olarak validations parametresi ile istenilen validasyonlar yapilabilir</param>
+            <param name="parameters">Validations methodu icin extra parametrelere gerek duyarsaniz object array olarak atama yapip methodunuzda ilgili castler ile bu parametreden nesnelerinizi cekebilirsiniz</param>
+            <param name="secondParameters">secondValidation methodunun parametresi</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.Execute(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Type}},System.String,ALFAsposeHelper.InfoLog,System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Object[],System.Func{System.Collections.Generic.KeyValuePair{System.String[],System.Collections.Generic.List{System.String}},System.Data.DataRow,System.String,System.String,System.String},System.Boolean,System.IO.Stream)">
+            <summary>
+            Visual Studyoda test etmek harici kullanilmamali!!!
+            </summary>
+            <param name="info"></param>
+            <param name="globalAttributes"></param>
+            <param name="attUpload"></param>
+            <param name="logonUser"></param>
+            <param name="language"></param>
+            <param name="globalId"></param>
+            <param name="CreateServerConnection"></param>
+            <param name="CreateDatabaseProvider"></param>
+            <param name="ShowMessageBox"></param>
+            <param name="WriteToResponse"></param>
+            <param name="Validations"></param>
+            <param name="SecondValidation"></param>
+            <param name="parameters"></param>
+            <param name="secondParameters"></param>
+            <param name="AdditionalUpdate"></param>
+            <param name="multiLanguage"></param>
+            <param name="excelStream"></param>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.UpdateInfo(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{System.String[],System.Collections.Generic.List{System.String}}},System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Type}},System.String,System.String,eBAPI.Connection.eBAConnection,System.Data.SqlClient.SqlConnection,System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Func{System.Collections.Generic.KeyValuePair{System.String[],System.Collections.Generic.List{System.String}},System.Data.DataRow,System.String,System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Gerekli validasyonların yapıldığı ve personel bazlı update işlemlerinin yapıldığı main method
+            </summary>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.GetMainModalForms(ALFAsposeHelper.InfoLog,System.String,System.String,System.Data.SqlClient.SqlConnection,System.String)">
+            <summary>
+            Tüm personellerin ilgili Main modal formlarını sql üzerinden getiren method.
+            </summary>
+            <returns>Satır bazlı personellerin ilgili formlarını tutan Datatable </returns>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.GetLogColumns(ALFAsposeHelper.Info,ALFAsposeHelper.InfoLog,System.String,System.Data.SqlClient.SqlConnection,System.String)">
+            <summary>
+            Log tablosunda değişen alanların kontrol edilmesi ve tablodaki kolonların doldurulması için ilgili kolon isimlerini getiren method
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.IsFormActive(ALFAsposeHelper.Info,ALFAsposeHelper.InfoLog,System.Data.DataRow,System.Data.SqlClient.SqlConnection,System.String,System.String)">
+            <summary>
+            Formun başka bir kullanıcıda açık olup olmadığını kontrol eden method
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.UpdateMainModal(ALFAsposeHelper.Info,ALFAsposeHelper.InfoLog,ALFAsposeHelper.GlobalAttributes,System.Collections.Generic.KeyValuePair{System.String[],System.Collections.Generic.List{System.String}},System.Data.DataRow,System.Data.DataRow,System.Data.SqlClient.SqlConnection,System.String,System.String,System.Func{System.Collections.Generic.KeyValuePair{System.String[],System.Collections.Generic.List{System.String}},System.Data.DataRow,System.String,System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}})">
+            <summary>
+            Personel ve Form bazlı main formları güncelleyen method.
+            </summary>
+            <returns>Formların güncellenmiş halini geri döner</returns>
+        </member>
+        <member name="M:ALFAsposeHelper.MultipleFormsUpload.UpdateNewForm(System.Int32,System.Data.DataTable,System.String,System.Data.SqlClient.SqlConnection,ALFAsposeHelper.Info)">
+            <summary>
+            oluşturulan yeni ara formu, update edilen ana forma göre güncelleyen method,chbIsmain diger projelerde de olmali
+            </summary>
+        </member>
+        <member name="T:ALFAsposeHelper.SingleFormDownload">
+            <summary>
+            Tek bir formun verilerini excele cekmek icin kullanilan class
+            </summary>
+        </member>
+        <member name="M:ALFAsposeHelper.SingleFormDownload.Download(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,ALFAsposeHelper.Excel,System.String,System.String,System.Func{eBADB.eBADBProvider},System.Action{System.IO.Stream,System.String},System.Action{System.String,System.Int32,eBAControls.eBABaseForm.ShowInfoBarType},System.Collections.Generic.Dictionary{System.String,System.Data.DataTable},System.Boolean,System.Boolean)">
+            <summary>
+            Ebadaki tek bir formdan olusan modullerdeki bilgilerin update import icin hazirlanan templatei olusturur
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="excel">exceldeki satirlarin stylelari icin aspose.cell stylerini iceren class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="language">Turkish English gibi kullanilan dil belirtilmeli</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="ShowMessageBar">dllde hata verdigi icin ebadaki ShowMessageBar methodu parametre olarak verilir</param>
+            <param name="dictPersonnels">Update Yapilacaksa update edilecek sql satirlarinin unique edilerini iceren bir datatable sistemin global idsi ile dictionarye eklenmeli</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+            <param name="hasLookUp">tabloda mtl alan varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.SingleFormDownload.Download(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,ALFAsposeHelper.Excel,System.String,System.String,System.Func{eBADB.eBADBProvider},System.Action{System.IO.Stream,System.String},System.Action{System.String,System.Int32,eBAControls.eBABaseForm.ShowInfoBarType},System.Collections.Generic.Dictionary{System.String,System.Data.DataTable},System.Boolean,System.Boolean,System.Collections.Generic.List{System.String})">
+            <summary>
+            Ebadaki tek bir formdan olusan modullerdeki bilgilerin update import icin hazirlanan templatei olusturur
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="excel">exceldeki satirlarin stylelari icin aspose.cell stylerini iceren class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="language">Turkish English gibi kullanilan dil belirtilmeli</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="ShowMessageBar">dllde hata verdigi icin ebadaki ShowMessageBar methodu parametre olarak verilir</param>
+            <param name="dictPersonnels">Update Yapilacaksa update edilecek sql satirlarinin unique edilerini iceren bir datatable sistemin global idsi ile dictionarye eklenmeli</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+            <param name="hasLookUp">tabloda mtl alan varsa true degilse false</param>
+            <param name="dtFields">eger sadece belirli alanlar indirilmek isteniliyorsa o alanlari iceren list</param>
+        </member>
+        <member name="T:ALFAsposeHelper.SingleFormUpload">
+            <summary>
+            Ebadaki Tek bir forma update ve ya import icin kullanilan class
+            </summary>
+        </member>
+        <member name="M:ALFAsposeHelper.SingleFormUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.SingleFormUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String,System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="AdditionalUpdate">Update ya da import sirasinda sql tarafinda harici bir islem yapilmasi gerekirse bu parametreyi kullanarak kendi methodunuzu olusturabilirsiniz</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.SingleFormUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Type}},System.String,ALFAsposeHelper.InfoLog,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Object[],System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="Validations">Mutlaka girilmesi gereken alanlar, olmamasi gereken eslesmeler gibi projeye ozel kontroller icin method olusturup bu parametreyi kullanabilirsiniz</param>
+            <param name="parameters">Validations methodu icin extra parametrelere gerek duyarsaniz object array olarak atama yapip methodunuzda ilgili castler ile bu parametreden nesnelerinizi cekebilirsiniz</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.SingleFormUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Type}},System.String,ALFAsposeHelper.InfoLog,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Object[],System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String,System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="Validations">Mutlaka girilmesi gereken alanlar, olmamasi gereken eslesmeler gibi projeye ozel kontroller icin method olusturup bu parametreyi kullanabilirsiniz</param>
+            <param name="parameters">Validations methodu icin extra parametrelere gerek duyarsaniz object array olarak atama yapip methodunuzda ilgili castler ile bu parametreden nesnelerinizi cekebilirsiniz</param>
+            <param name="AdditionalUpdate">Update ya da import sirasinda sql tarafinda harici bir islem yapilmasi gerekirse bu parametreyi kullanarak kendi methodunuzu olusturabilirsiniz</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.SingleFormUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="SecondValidation">extrem durumlar haricinde kullanilmasina gerek olmayacak bir parametre, genel olarak validations parametresi ile istenilen validasyonlar yapilabilir</param>
+            <param name="secondParameters">secondValidation methodunun parametresi</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.SingleFormUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String,System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="SecondValidation">extrem durumlar haricinde kullanilmasina gerek olmayacak bir parametre, genel olarak validations parametresi ile istenilen validasyonlar yapilabilir</param>
+            <param name="secondParameters">secondValidation methodunun parametresi</param>
+            <param name="AdditionalUpdate">Update ya da import sirasinda sql tarafinda harici bir islem yapilmasi gerekirse bu parametreyi kullanarak kendi methodunuzu olusturabilirsiniz</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.SingleFormUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Type}},System.String,ALFAsposeHelper.InfoLog,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Object[],System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String,System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="Validations">Mutlaka girilmesi gereken alanlar, olmamasi gereken eslesmeler gibi projeye ozel kontroller icin method olusturup bu parametreyi kullanabilirsiniz</param>
+            <param name="SecondValidation">extrem durumlar haricinde kullanilmasina gerek olmayacak bir parametre, genel olarak validations parametresi ile istenilen validasyonlar yapilabilir</param>
+            <param name="parameters">Validations methodu icin extra parametrelere gerek duyarsaniz object array olarak atama yapip methodunuzda ilgili castler ile bu parametreden nesnelerinizi cekebilirsiniz</param>
+            <param name="secondParameters">secondValidation methodunun parametresi</param>
+            <param name="AdditionalUpdate">Update ya da import sirasinda sql tarafinda harici bir islem yapilmasi gerekirse bu parametreyi kullanarak kendi methodunuzu olusturabilirsiniz</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.SingleFormUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Type}},System.String,ALFAsposeHelper.InfoLog,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Object[],System.Boolean)">
+            <summary>
+            Excel Uzerinden Ebadaki tek bir forma update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="Validations">Mutlaka girilmesi gereken alanlar, olmamasi gereken eslesmeler gibi projeye ozel kontroller icin method olusturup bu parametreyi kullanabilirsiniz</param>
+            <param name="SecondValidation">extrem durumlar haricinde kullanilmasina gerek olmayacak bir parametre, genel olarak validations parametresi ile istenilen validasyonlar yapilabilir</param>
+            <param name="parameters">Validations methodu icin extra parametrelere gerek duyarsaniz object array olarak atama yapip methodunuzda ilgili castler ile bu parametreden nesnelerinizi cekebilirsiniz</param>
+            <param name="secondParameters">secondValidation methodunun parametresi</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.SingleFormUpload.ExecuteUpdate(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Type}},System.String,ALFAsposeHelper.InfoLog,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Object[],System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String,System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String},System.Boolean,System.IO.Stream)">
+            <summary>
+            sadece test ederken visual studyoda kullanilmalidir
+            </summary>
+            <param name="info"></param>
+            <param name="globalAttributes"></param>
+            <param name="attUpload"></param>
+            <param name="language"></param>
+            <param name="globalId"></param>
+            <param name="CreateServerConnection"></param>
+            <param name="CreateDatabaseProvider"></param>
+            <param name="ShowMessageBox"></param>
+            <param name="WriteToResponse"></param>
+            <param name="Validations"></param>
+            <param name="SecondValidation"></param>
+            <param name="parameters"></param>
+            <param name="secondParameters"></param>
+            <param name="AdditionalUpdate"></param>
+            <param name="multiLanguage"></param>
+            <param name="excelStream"></param>
+        </member>
+        <member name="M:ALFAsposeHelper.SingleFormUpload.ExecuteImport(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.Tuple{System.String,System.String,System.Type}},System.String,ALFAsposeHelper.InfoLog,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Object[],System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String,System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String},System.Boolean,System.IO.Stream)">
+            <summary>
+            sadece test etmek icin kullanilmalidir
+            </summary>
+            <param name="info"></param>
+            <param name="globalAttributes"></param>
+            <param name="attUpload"></param>
+            <param name="language"></param>
+            <param name="globalId"></param>
+            <param name="CreateServerConnection"></param>
+            <param name="CreateDatabaseProvider"></param>
+            <param name="ShowMessageBox"></param>
+            <param name="WriteToResponse"></param>
+            <param name="Validations"></param>
+            <param name="SecondValidation"></param>
+            <param name="parameters"></param>
+            <param name="secondParameters"></param>
+            <param name="AdditionalUpdate"></param>
+            <param name="multiLanguage"></param>
+            <param name="excelStream"></param>
+        </member>
+        <member name="M:ALFAsposeHelper.SqlCalls.RunQueries(System.String,System.Data.SqlClient.SqlConnection)">
+            <summary>
+            Sql sorgularını çalıştırıp gelen veriyi datatablea aktaran method
+            </summary>
+            <param name="comm"></param>
+            <param name="Connection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ALFAsposeHelper.SqlCalls.RunQueries(System.String,System.Data.SqlClient.SqlConnection,ALFAsposeHelper.InfoLog,System.String)">
+            <summary>
+            Hata alınma ihtimali olan querylerde hata mesajını da oluşturmak için kullanılan method
+            </summary>
+            <param name="comm"></param>
+            <param name="Connection"></param>
+            <param name="logRecord"></param>
+            <param name="logonUser"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ALFAsposeHelper.TableDownload">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ALFAsposeHelper.TableDownload.Download(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,ALFAsposeHelper.Excel,System.String,System.String,System.Func{eBADB.eBADBProvider},System.Action{System.IO.Stream,System.String},System.Action{System.String,System.Int32,eBAControls.eBABaseForm.ShowInfoBarType},System.Collections.Generic.Dictionary{System.String,System.Data.DataTable},System.Collections.Generic.Dictionary{System.String,System.String},System.Boolean,System.Boolean)">
+            <summary>
+            Sqldeki bir tablonun  bilgilerin update import icin hazirlanan templatei olusturur
+            </summary>
+            
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="excel">exceldeki satirlarin stylelari icin aspose.cell stylerini iceren class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="language">Turkish English gibi kullanilan dil belirtilmeli</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="ShowMessageBar">dllde hata verdigi icin ebadaki ShowMessageBar methodu parametre olarak verilir</param>
+            <param name="dictPersonnels">Update Yapilacaksa update edilecek sql satirlarinin unique edilerini iceren bir datatable sistemin global idsi ile dictionarye eklenmeli</param>
+            <param name="multiLanguage">Lookupta multilanguage varsa true degilse false</param>
+            <param name="dictLabel">excelde basliklarin isimlendirilmesi icin gerekli dictionary</param>
+            <param name="hasLookUp">tabloda mtl alan varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.TableDownload.Download(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,ALFAsposeHelper.Excel,System.String,System.String,System.Func{eBADB.eBADBProvider},System.Action{System.IO.Stream,System.String},System.Action{System.String,System.Int32,eBAControls.eBABaseForm.ShowInfoBarType},System.Collections.Generic.Dictionary{System.String,System.Data.DataTable},System.Collections.Generic.Dictionary{System.String,System.String},System.Boolean,System.Boolean,System.Collections.Generic.List{System.String})">
+            <summary>
+            Sqldeki bir tablonun  bilgilerin update import icin hazirlanan templatei olusturur
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="excel">exceldeki satirlarin stylelari icin aspose.cell stylerini iceren class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="language">Turkish English gibi kullanilan dil belirtilmeli</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="ShowMessageBar">dllde hata verdigi icin ebadaki ShowMessageBar methodu parametre olarak verilir</param>
+            <param name="dictPersonnels">Update Yapilacaksa update edilecek sql satirlarinin unique edilerini iceren bir datatable sistemin global idsi ile dictionarye eklenmeli</param>
+            <param name="multiLanguage">Lookupta multilanguage varsa true degilse false</param>
+            <param name="dictLabel">excelde basliklarin isimlendirilmesi icin gerekli dictionary</param>
+            <param name="hasLookUp">tabloda mtl alan varsa true degilse false</param>
+            <param name="dtFields">eger sadece belirli alanlar indirilmek isteniliyorsa o alanlari iceren list</param>
+        </member>
+        <member name="T:ALFAsposeHelper.TableUpload">
+            <summary>
+            Sqldeki bir tabloya verileri yuklemek ve ya guncellemek icin kullanilir
+            </summary>
+        </member>
+        <member name="M:ALFAsposeHelper.TableUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden sqldeki bir tabloya update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.TableUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String,System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden sqldeki bir tabloya update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>		
+            <param name="AdditionalUpdate">Update ya da import sirasinda sql tarafinda harici bir islem yapilmasi gerekirse bu parametreyi kullanarak kendi methodunuzu olusturabilirsiniz</param>
+            <param name="AdditionalQuery"></param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.TableUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.String},System.String,ALFAsposeHelper.InfoLog,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Object[],System.Boolean)">
+            <summary>
+            Excel Uzerinden sqldeki bir tabloya update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="Validations">Mutlaka girilmesi gereken alanlar, olmamasi gereken eslesmeler gibi projeye ozel kontroller icin method olusturup bu parametreyi kullanabilirsiniz</param>
+            <param name="parameters">Validations methodu icin extra parametrelere gerek duyarsaniz object array olarak atama yapip methodunuzda ilgili castler ile bu parametreden nesnelerinizi cekebilirsiniz</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.TableUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.String},System.String,ALFAsposeHelper.InfoLog,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Object[],System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String,System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden sqldeki bir tabloya update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="Validations">Mutlaka girilmesi gereken alanlar, olmamasi gereken eslesmeler gibi projeye ozel kontroller icin method olusturup bu parametreyi kullanabilirsiniz</param>
+            <param name="parameters">Validations methodu icin extra parametrelere gerek duyarsaniz object array olarak atama yapip methodunuzda ilgili castler ile bu parametreden nesnelerinizi cekebilirsiniz</param>
+            <param name="AdditionalUpdate">Update ya da import sirasinda sql tarafinda harici bir islem yapilmasi gerekirse bu parametreyi kullanarak kendi methodunuzu olusturabilirsiniz</param>
+            <param name="AdditionalQuery"></param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.TableUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Boolean)">
+            <summary>
+            Excel Uzerinden sqldeki bir tabloya update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="SecondValidation">extrem durumlar haricinde kullanilmasina gerek olmayacak bir parametre, genel olarak validations parametresi ile istenilen validasyonlar yapilabilir</param>
+            <param name="secondParameters">secondValidation methodunun parametresi</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.TableUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String,System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden sqldeki bir tabloya update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="SecondValidation">extrem durumlar haricinde kullanilmasina gerek olmayacak bir parametre, genel olarak validations parametresi ile istenilen validasyonlar yapilabilir</param>
+            <param name="secondParameters">secondValidation methodunun parametresi</param>
+            <param name="AdditionalUpdate">Update ya da import sirasinda sql tarafinda harici bir islem yapilmasi gerekirse bu parametreyi kullanarak kendi methodunuzu olusturabilirsiniz</param>
+            <param name="AdditionalQuery"></param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.TableUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.String},System.String,ALFAsposeHelper.InfoLog,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Object[],System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String,System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String},System.Boolean)">
+            <summary>
+            Excel Uzerinden sqldeki bir tabloya update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="Validations">Mutlaka girilmesi gereken alanlar, olmamasi gereken eslesmeler gibi projeye ozel kontroller icin method olusturup bu parametreyi kullanabilirsiniz</param>
+            <param name="SecondValidation">extrem durumlar haricinde kullanilmasina gerek olmayacak bir parametre, genel olarak validations parametresi ile istenilen validasyonlar yapilabilir</param>
+            <param name="parameters">Validations methodu icin extra parametrelere gerek duyarsaniz object array olarak atama yapip methodunuzda ilgili castler ile bu parametreden nesnelerinizi cekebilirsiniz</param>
+            <param name="secondParameters">secondValidation methodunun parametresi</param>
+            <param name="AdditionalUpdate">Update ya da import sirasinda sql tarafinda harici bir islem yapilmasi gerekirse bu parametreyi kullanarak kendi methodunuzu olusturabilirsiniz</param>
+            <param name="AdditionalQuery"></param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.TableUpload.Upload(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,eBAControls.eBAAttachments,System.String,System.String,System.String,System.Func{eBAPI.Connection.eBAConnection},System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.String},System.String,ALFAsposeHelper.InfoLog,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Object[],System.Boolean)">
+            <summary>
+            Excel Uzerinden sqldeki bir tabloya update ya da import icin kullanilir
+            </summary>
+            <param name="info">proje hakkindaki bilgilerin tutuldugu class</param>
+            <param name="globalAttributes">form isimleri, yasakli alanlar gibi verilerin tutuldugu class</param>
+            <param name="attUpload">attachment nesnesi</param>
+            <param name="logonUser">yukleme yapan kullanicinin eba kullanici IDsi ornegin; "afidan"</param>
+            <param name="lang">ebada kullanilan dil ornegin; "Turkish","English"</param>
+            <param name="globalId">formun Unique IDsi</param>
+            <param name="CreateServerConnection">dllde hata verdigi icin ebadaki CreateServerConnection methodu parametre olarak verilir</param>
+            <param name="CreateDatabaseProvider">dllde hata verdigi icin ebadaki CreateDatabaseProvider methodu parametre olarak verilir</param>
+            <param name="ShowMessageBox">dllde hata verdigi icin ebadaki ShowMessageBox methodu parametre olarak verilir</param>
+            <param name="WriteToResponse">dllde hata verdigi icin ebadaki WriteToResponse methodu parametre olarak verilir</param>
+            <param name="Validations">Mutlaka girilmesi gereken alanlar, olmamasi gereken eslesmeler gibi projeye ozel kontroller icin method olusturup bu parametreyi kullanabilirsiniz</param>
+            <param name="SecondValidation">extrem durumlar haricinde kullanilmasina gerek olmayacak bir parametre, genel olarak validations parametresi ile istenilen validasyonlar yapilabilir</param>
+            <param name="parameters">Validations methodu icin extra parametrelere gerek duyarsaniz object array olarak atama yapip methodunuzda ilgili castler ile bu parametreden nesnelerinizi cekebilirsiniz</param>
+            <param name="secondParameters">secondValidation methodunun parametresi</param>
+            <param name="multiLanguage">Labellarda multilanguage varsa true degilse false</param>
+        </member>
+        <member name="M:ALFAsposeHelper.TableUpload.Excute(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,System.String,System.String,System.String,System.Func{eBADB.eBADBProvider},System.Action{System.String,eBAControls.eBABaseForm.eBAMessageBoxType},System.Action{System.Byte[],System.String},System.Func{ALFAsposeHelper.Info,System.Data.DataTable,System.Func{eBADB.eBADBProvider},System.Collections.Generic.List{System.String},System.String,ALFAsposeHelper.InfoLog,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}},System.Object[],System.Collections.Generic.List{System.String}},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Object[],System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String,System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String},System.Boolean,System.IO.Stream)">
+            <summary>
+            sadece deneme amacli kullanilmalidir
+            </summary>
+            <param name="info"></param>
+            <param name="globalAttributes"></param>
+            <param name="logonUser"></param>
+            <param name="language"></param>
+            <param name="globalId"></param>
+            <param name="CreateDatabaseProvider"></param>
+            <param name="ShowMessageBox"></param>
+            <param name="WriteToResponse"></param>
+            <param name="Validations"></param>
+            <param name="SecondValidation"></param>
+            <param name="parameters"></param>
+            <param name="secondParameters"></param>
+            <param name="AdditionalUpdate"></param>
+            <param name="multiLanguage"></param>
+            <param name="excelStream"></param>
+        </member>
+        <member name="M:ALFAsposeHelper.TableUpload.UpdateInfo(ALFAsposeHelper.Info,ALFAsposeHelper.GlobalAttributes,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String,System.String,System.String,System.Func{eBADB.eBADBProvider},System.Func{ALFAsposeHelper.Info,System.Int32,System.Data.DataColumnCollection,ALFAsposeHelper.InfoLog,System.Data.DataTable,System.Object[],System.Boolean},System.Object[],System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String,System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String},System.Boolean)">
+            <summary>
+            Gerekli validasyonların yapıldığı ve personel bazlı update işlemlerinin yapıldığı main method
+            </summary>
+        </member>
+        <member name="M:ALFAsposeHelper.TableUpload.UpdateMainModal(ALFAsposeHelper.Info,ALFAsposeHelper.InfoLog,ALFAsposeHelper.GlobalAttributes,System.Collections.Generic.List{System.String},System.Data.DataRow,System.Data.DataRow,System.Data.SqlClient.SqlConnection,System.String,System.String,System.String,System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String,System.String},System.Func{System.Collections.Generic.List{System.String},System.Data.DataRow,System.String,System.String},System.Boolean)">
+            <summary>
+            Personel ve Form bazlı main formları güncelleyen method.
+            </summary>
+            <returns>Formların güncellenmiş halini geri döner</returns>
+        </member>
+    </members>
+</doc>
