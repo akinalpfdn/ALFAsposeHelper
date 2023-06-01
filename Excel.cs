@@ -122,7 +122,16 @@ namespace ALFAsposeHelper
 					for (int col = 0; col < data.Columns.Count; col++)
 					{
 						ws.Cells[row + 1, col].PutValue(data.Rows[row][col]);
+						if (data.Columns[col].DataType == typeof(DateTime) || data.Columns[col].DataType == typeof(DateTime))
+						{
+							CellStyle.Number = 14;
+						}
+						else
+						{
+							CellStyle.Number = 0;
+						}
 						ws.Cells[row + 1, col].SetStyle(CellStyle);
+
 					}
 				}
 				ws.AutoFitColumns();

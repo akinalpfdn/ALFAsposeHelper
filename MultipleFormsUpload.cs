@@ -475,6 +475,7 @@ namespace ALFAsposeHelper
 				Dictionary<string, DataTable> dictFields = (Dictionary<string, DataTable>)Fields.TakeMtlValues(info, columns, langCode, CreateDatabaseProvider, Fields.AddDictionary, new Dictionary<string, DataTable>(), "", multiLanguage);
 				idsToDelete = Fields.CellValidations(globalAttributes, excelTable, excelTableTemp, logRecord, dictFields);
 				idsToDelete = idsToDelete.Distinct().ToList();
+				excelTable.AcceptChanges();
 				foreach (DataRow row in excelTable.Rows)
 				{
 					if (idsToDelete.Contains(row[0].ToString()))
